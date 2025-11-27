@@ -49,11 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Gameplay/PlayerSpawn.cs" />
+    <Compile Include="Assets/UI/MetaGameController.cs" />
     <Compile Include="Assets/Scripts/Core/Simulation.InstanceRegister.cs" />
     <Compile Include="Assets/Mod Assets/Mod Resources/Scripts/Platformer/Jiggler.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerEnteredVictoryZone.cs" />
     <Compile Include="Assets/Mod Assets/Mod Resources/Scripts/Platformer/EmitParticlesOnLand.cs" />
-    <Compile Include="Assets/Scripts/UI/MainUIController.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerEnteredDeathZone.cs" />
     <Compile Include="Assets/Scripts/Gameplay/HealthIsZero.cs" />
     <Compile Include="Assets/Scripts/Mechanics/PatrolPath.Mover.cs" />
@@ -73,12 +73,12 @@
     <Compile Include="Assets/Scripts/Core/HeapQueue.cs" />
     <Compile Include="Assets/Scripts/Mechanics/SpawnPoint.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerStopJump.cs" />
+    <Compile Include="Assets/UI/MainUIController.cs" />
     <Compile Include="Assets/Scripts/Mechanics/PlayAudioClip.cs" />
     <Compile Include="Assets/Mod Assets/Mod Resources/Scripts/Platformer/PlatformerSpeedPad.cs" />
     <Compile Include="Assets/Scripts/Mechanics/AnimationController.cs" />
     <Compile Include="Assets/Scripts/Core/Simulation.cs" />
     <Compile Include="Assets/Scripts/Mechanics/PatrolPath.cs" />
-    <Compile Include="Assets/Scripts/UI/MetaGameController.cs" />
     <Compile Include="Assets/Scripts/Gameplay/EnablePlayerInput.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerJumped.cs" />
     <Compile Include="Assets/Scripts/Mechanics/TokenController.cs" />
