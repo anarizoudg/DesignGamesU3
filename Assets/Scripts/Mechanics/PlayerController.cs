@@ -9,29 +9,19 @@ using UnityEngine.InputSystem;
 
 namespace Platformer.Mechanics
 {
-    /// <summary>
-    /// This is the main class used to implement control of the player.
-    /// It is a superset of the AnimationController class, but is inlined to allow for any kind of customisation.
-    /// </summary>
     public class PlayerController : KinematicObject
     {
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
-        /// <summary>
-        /// Max horizontal speed of the player.
-        /// </summary>
         public float maxSpeed = 7;
-        /// <summary>
-        /// Initial jump velocity at the start of a jump.
-        /// </summary>
         public float jumpTakeOffSpeed = 7;
 
         public JumpState jumpState = JumpState.Grounded;
         private bool stopJump;
-        /*internal new*/ public Collider2D collider2d;
-        /*internal new*/ public AudioSource audioSource;
+        public Collider2D collider2d;
+        public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
 
@@ -43,6 +33,13 @@ namespace Platformer.Mechanics
 
         private InputAction m_MoveAction;
         private InputAction m_JumpAction;
+
+        // ----------- NUEVO PARA DISPARAR -----------
+        public GameObject bulletPrefab;
+        public Transform firePoint;
+        public float bulletSpeed = 10f;
+        private InputAction m_ShootAction;
+        // -------------------------------------------
 
         public Bounds Bounds => collider2d.bounds;
 
@@ -56,9 +53,18 @@ namespace Platformer.Mechanics
 
             m_MoveAction = InputSystem.actions.FindAction("Player/Move");
             m_JumpAction = InputSystem.actions.FindAction("Player/Jump");
-            
+
+            // ----------- NUEVO PARA DISPARAR -----------
+            m_ShootAction = InputSystem.actions.FindAction("Player/Shoot");
+            // -------------------------------------------
+
             m_MoveAction.Enable();
             m_JumpAction.Enable();
+
+            // ----------- NUEVO -----------
+            if (m_ShootAction != null)
+                m_ShootAction.Enable();
+            // -----------------------------
         }
 
         protected override void Update()
@@ -66,6 +72,7 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 move.x = m_MoveAction.ReadValue<Vector2>().x;
+
                 if (jumpState == JumpState.Grounded && m_JumpAction.WasPressedThisFrame())
                     jumpState = JumpState.PrepareToJump;
                 else if (m_JumpAction.WasReleasedThisFrame())
@@ -73,11 +80,14 @@ namespace Platformer.Mechanics
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
                 }
+
+                // ----------- NUEVO DISPARO -----------
+                if (m_ShootAction != null && m_ShootAction.WasPressedThisFrame())
+                    Shoot();
+                // ---------------------------------------
             }
-            else
-            {
-                move.x = 0;
-            }
+            else move.x = 0;
+
             UpdateJumpState();
             base.Update();
         }
@@ -138,6 +148,23 @@ namespace Platformer.Mechanics
 
             targetVelocity = move * maxSpeed;
         }
+
+        // ============ FUNCIÓN NUEVA DE DISPARAR ============
+        void Shoot()
+        {
+            if (bulletPrefab == null || firePoint == null)
+            {
+                Debug.LogWarning("Falta asignar bulletPrefab o firePoint en el Inspector.");
+                return;
+            }
+
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+            if (rb != null)
+                rb.linearVelocity = firePoint.right * bulletSpeed;
+        }
+        // ====================================================
 
         public enum JumpState
         {

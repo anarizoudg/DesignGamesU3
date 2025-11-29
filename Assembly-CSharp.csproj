@@ -52,6 +52,7 @@
     <Compile Include="Assets/UI/MetaGameController.cs" />
     <Compile Include="Assets/Scripts/Core/Simulation.InstanceRegister.cs" />
     <Compile Include="Assets/Mod Assets/Mod Resources/Scripts/Platformer/Jiggler.cs" />
+    <Compile Include="Assets/Scripts/Gameplay/BulletDestroy.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerEnteredVictoryZone.cs" />
     <Compile Include="Assets/Mod Assets/Mod Resources/Scripts/Platformer/EmitParticlesOnLand.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerEnteredDeathZone.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Assets/Scripts/Gameplay/PlayerDeath.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerTokenCollision.cs" />
     <Compile Include="Assets/Scripts/Mechanics/VictoryZone.cs" />
+    <Compile Include="Assets/Scripts/Gameplay/PlayerShooting.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerEnemyCollision.cs" />
     <Compile Include="Assets/Scripts/Mechanics/Health.cs" />
     <Compile Include="Assets/Scripts/Mechanics/KinematicObject.cs" />
