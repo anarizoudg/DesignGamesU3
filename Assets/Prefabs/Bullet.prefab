@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3376526249501236949}
   - component: {fileID: 7767721754862201867}
   - component: {fileID: 1778011079369514334}
+  - component: {fileID: 4772136649735552069}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -117,7 +118,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &1778011079369514334
 BoxCollider2D:
@@ -165,3 +166,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4772136649735552069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180694243792775982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc696a2081889453b832c18fb21bbe12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletDestroy
