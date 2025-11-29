@@ -65,6 +65,7 @@
     <Compile Include="Assets/Scripts/Core/Simulation.Event.cs" />
     <Compile Include="Assets/Scripts/Mechanics/EnemyController.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerDeath.cs" />
+    <Compile Include="Assets/Scripts/Gameplay/PlayerDataManager.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerTokenCollision.cs" />
     <Compile Include="Assets/Scripts/Mechanics/VictoryZone.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerShooting.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets/Scripts/Mechanics/GameController.cs" />
     <Compile Include="Assets/Scripts/Gameplay/PlayerLanded.cs" />
     <Compile Include="Assets/Scripts/View/AnimatedTile.cs" />
+    <Compile Include="Assets/Scripts/Gameplay/PlayerProgressManager.cs" />
     <Compile Include="Assets/Scripts/Mechanics/PlayerController.cs" />
     <Compile Include="Assets/Scripts/Gameplay/EnemyDeath.cs" />
   </ItemGroup>
