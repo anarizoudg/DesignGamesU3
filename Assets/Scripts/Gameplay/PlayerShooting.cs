@@ -17,7 +17,6 @@ namespace Platformer.Gameplay
 
             if (shootAction == null)
                 Debug.LogError("❌ No se encontró la acción Player/Attack");
-
             else
                 shootAction.Enable();
         }
@@ -57,7 +56,7 @@ namespace Platformer.Gameplay
                 return;
             }
 
-            rb.linearVelocity = firePoint.right * bulletSpeed;
+            rb.linearVelocity = firePoint.right * bulletSpeed;  // ← CORREGIDO
             Debug.Log("➡ Velocidad de bala: " + rb.linearVelocity);
         }
     }

@@ -1,56 +1,61 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Platformer.Mechanics
 {
-    /// <summary>
-    /// This class animates all token instances in a scene.
-    /// This allows a single update call to animate hundreds of sprite 
-    /// animations.
-    /// If the tokens property is empty, it will automatically find and load 
-    /// all token instances in the scene at runtime.
-    /// </summary>
     public class TokenController : MonoBehaviour
     {
         [Tooltip("Frames per second at which tokens are animated.")]
         public float frameRate = 12;
-        [Tooltip("Instances of tokens which are animated. If empty, token instances are found and loaded at runtime.")]
-        public TokenInstance[] tokens;
+
+        [Tooltip("Token instances. If empty, they will be auto-detected by tag 'Token'.")]
+        public List<TokenInstance> tokens = new List<TokenInstance>();
 
         float nextFrameTime = 0;
 
-        [ContextMenu("Find All Tokens")]
-        void FindAllTokensInScene()
-        {
-            tokens = UnityEngine.Object.FindObjectsByType<TokenInstance>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        }
-
         void Awake()
         {
-            //if tokens are empty, find all instances.
-            //if tokens are not empty, they've been added at editor time.
-            if (tokens.Length == 0)
-                FindAllTokensInScene();
-            //Register all tokens so they can work with this controller.
-            for (var i = 0; i < tokens.Length; i++)
+            // Si la lista está vacía → buscar tokens automáticamente
+            if (tokens.Count == 0)
             {
-                tokens[i].tokenIndex = i;
-                tokens[i].controller = this;
+                GameObject[] found = GameObject.FindGameObjectsWithTag("Token");
+                Debug.Log("🔍 Tokens encontrados con Tag 'Token': " + found.Length);
+
+                foreach (var obj in found)
+                {
+                    TokenInstance t = obj.GetComponent<TokenInstance>();
+                    if (t != null)
+                    {
+                        tokens.Add(t);
+                    }
+                }
+
+                Debug.Log("🎯 Tokens detectados automáticamente: " + tokens.Count);
+            }
+
+            // Registrar índices y controller
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                if (tokens[i] != null)
+                {
+                    tokens[i].tokenIndex = i;
+                    tokens[i].controller = this;
+                }
             }
         }
 
         void Update()
         {
-            //if it's time for the next frame...
             if (Time.time - nextFrameTime > (1f / frameRate))
             {
-                //update all tokens with the next animation frame.
-                for (var i = 0; i < tokens.Length; i++)
+                for (int i = 0; i < tokens.Count; i++)
                 {
                     var token = tokens[i];
-                    //if token is null, it has been disabled and is no longer animated.
+
                     if (token != null)
                     {
                         token._renderer.sprite = token.sprites[token.frame];
+
                         if (token.collected && token.frame == token.sprites.Length - 1)
                         {
                             token.gameObject.SetActive(false);
@@ -62,10 +67,9 @@ namespace Platformer.Mechanics
                         }
                     }
                 }
-                //calculate the time of the next frame.
+
                 nextFrameTime += 1f / frameRate;
             }
         }
-
     }
 }

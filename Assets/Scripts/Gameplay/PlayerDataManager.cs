@@ -7,7 +7,9 @@ namespace Platformer.Gameplay
     public class PlayerDataManager : MonoBehaviour
     {
         public string playerName = "Player1";
-        private string url = "http://localhost:8081/UnityGame/player_progress.php";
+        [Header("Servidor PHP")]
+        public string url = "http://localhost:8081/UnityGame/player_progress.php";
+
         // Guardar progreso
         public void SaveProgress(int totalCoins, bool level1Completed, bool level2Completed)
         {
